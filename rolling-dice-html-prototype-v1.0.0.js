@@ -27,25 +27,80 @@ const rollingDice = function (){
 };
 
 // Define HTML prototype functions
-function rollingDiceClick(){
+function rollingDiceHTMLProto(){
     // Define dice 1 elements
     const rDice1 = Array.from(document.getElementById('rolling-dice-1').querySelectorAll('.side'));
     const rDice2 = Array.from(document.getElementById('rolling-dice-2').querySelectorAll('.side'));
 
-    // rDice1: get the side
-        // TOBEDONE
-        // iterate through each side
-        // find the index from APP
-        // get the nTH element from sides
-        // apply style display: flex
-        // rest of them: apply style display: none
+    // Define roll button
+    const rollButton = document.getElementById('roll-button');
 
-    // rDice2: get the side
-        // TOBEDONE
+    // OPTIONAL ------------------------------------------------
+    // Define initial position of the dice/s
+    function setSides(dice1, dice2){
+        // set sides for rDice1
+        dice1.forEach(function(element, index) {
+            if(index !== 0){
+                element.setAttribute('style', 'display: none;');
+            }
+        });
 
+        // set sides for dice2
+        dice2.forEach(function(element, index){
+            if(index !== 0){
+                element.setAttribute('style', 'display: none;');
+            }
+        });
+    };
+    // Run set initial positions of sides
+    // setSides(rDice1, rDice2);
+    // -----------------------------------------------------------
 
-    // test log
-    console.log(rDice1);
-    console.log(rDice2);
+    // Define roll on click function
+    function rollingDiceClick(){
+        // Get the values
+        let side1value = rollingDice().dice1();
+        let side2value = rollingDice().dice2();
+        // console.log(side1value);
+        // console.log(side2value);
+
+        // rDice1: get the side
+            // iterate through each side
+            // find the index from APP
+            // get the nTH element from sides
+            // apply style display: flex
+            // rest of them: apply style display: none
+        rDice1.forEach(function(element, index){
+            element.setAttribute('style', 'display: none;');
+            // console.log(index);
+            if((index + 1) === side1value){
+                element.setAttribute('style', 'display: flex;');
+                // console.log(index);
+            }
+        })
+
+        // rDice2: get the side
+        rDice2.forEach(function(element, index){
+            element.setAttribute('style', 'display: none;');
+            // console.log(index);
+            if((index + 1) === side2value){
+                element.setAttribute('style', 'display: flex;');
+                // console.log(index);
+            }
+        });
+
+        // test log
+        // console.log(rDice1);
+        // console.log(rDice2);
+    }
+    rollingDiceClick();
+
+    // Define function for roll button
+    rollButton.addEventListener('click', function(){
+        rollingDiceClick();
+    })
+
 }
-rollingDiceClick(); // TOBEDONE: add a button and function work on click
+rollingDiceHTMLProto();
+
+
